@@ -12,10 +12,18 @@
 }
 else
 {
-    <ul>
+    <table class="table table-hover table-striped">
+        <tr>
+            <th>@Html.DisplayNameFor(c => c[0].Name)</th>
+            <th>@Html.DisplayNameFor(c => c[0].MembershipType.DiscountRate)</th>
+        </tr>
+
         @foreach (var customer in Model)
         {
-            <li>@customer.Name</li>
+            <tr>
+                <td>@Html.DisplayFor(c => customer.Name)</td>
+                <td>@Html.DisplayFor(c => customer.MembershipType.DiscountRate)</td>
+            </tr>
         }
-    </ul>
+    </table>
 }
