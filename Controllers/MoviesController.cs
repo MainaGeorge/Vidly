@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,20 +9,29 @@ namespace Vidly.Controllers
 {
     public class MoviesController : Controller
     {
+        private readonly ApplicationDbContext _context;
         // GET: Movies
-        private List<Movie> _movies;
         public MoviesController()
         {
-            _movies = new List<Movie>()
-            {
-                new Movie() {Id = 1, Name = "Baby boss"},
-                new Movie() {Id = 2, Name = "Fast and Furious"},
-                new Movie() {Id = 3, Name = "The Matrix"}
-            };
+            _context = new ApplicationDbContext();
         }
         public ActionResult Index()
         {
-            return View(_movies);
+            var movies = _context.Movies.Include(c => c.Genre).ToList();
+            return View(movies);
+        }
+
+        public ActionResult Detail(int id)
+        {
+            var movie = _context.Movies.Include(m => m.Genre).FirstOrDefault(m => m.Id == id);
+            if (movie == null)
+                return HttpNotFound();
+            return View(movie);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
         }
     }
 }
