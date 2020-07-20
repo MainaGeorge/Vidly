@@ -205,6 +205,10 @@
     <Compile Include="Migrations\202007201101311_PopulatingNameForExistingMembershipTypes.Designer.cs">
       <DependentUpon>202007201101311_PopulatingNameForExistingMembershipTypes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007201111557_AddingBirthDateToCustomer.cs" />
+    <Compile Include="Migrations\202007201111557_AddingBirthDateToCustomer.Designer.cs">
+      <DependentUpon>202007201111557_AddingBirthDateToCustomer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -406,6 +410,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007201101311_PopulatingNameForExistingMembershipTypes.resx">
       <DependentUpon>202007201101311_PopulatingNameForExistingMembershipTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007201111557_AddingBirthDateToCustomer.resx">
+      <DependentUpon>202007201111557_AddingBirthDateToCustomer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

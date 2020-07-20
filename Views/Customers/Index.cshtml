@@ -23,6 +23,7 @@ else
             <tr>
                 <td>@Html.DisplayFor(c => customer.Name)</td>
                 <td>@Html.DisplayFor(c => customer.MembershipType.Name)</td>
+                <td>@Html.ActionLink("Detail", "Detail", new { id = @customer.Id })</td>
             </tr>
         }
     </table>
