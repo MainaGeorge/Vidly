@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Vidly.Models.ViewModels
 {
-    public class ModifyCustomerViewModel
+    public class CustomerFormViewModel
     {
         public IEnumerable<MembershipType> MembershipTypes { get; set; }
         public Customer Customer { get; set; }

@@ -14,16 +14,13 @@ else
 {
     <table class="table table-hover table-striped">
         <tr>
-            <th>@Html.DisplayNameFor(c => c[0].Name)</th>
-            <th>@Html.DisplayNameFor(c => c[0].MembershipType.Name)</th>
+            <th>Name</th>
         </tr>
 
         @foreach (var customer in Model)
         {
             <tr>
-                <td>@Html.DisplayFor(c => customer.Name)</td>
-                <td>@Html.DisplayFor(c => customer.MembershipType.Name)</td>
-                <td>@Html.ActionLink("Detail", "Detail", new { id = @customer.Id })</td>
+                <td> @Html.ActionLink(customer.Name, "Edit", new { controller = "Customers", id = @customer.Id })</td>
             </tr>
         }
     </table>
