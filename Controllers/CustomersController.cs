@@ -3,12 +3,18 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using Vidly.Models;
+using Vidly.Models.ViewModels;
 
 namespace Vidly.Controllers
 {
     public class CustomersController : Controller
     {
         private readonly ApplicationDbContext _context;
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
 
         public CustomersController()
         {
@@ -21,11 +27,6 @@ namespace Vidly.Controllers
             return View(customers);
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            _context.Dispose();
-        }
-
         public ActionResult Detail(int id)
         {
             var customer = _context.Customers.FirstOrDefault(c => c.Id == id);
@@ -34,6 +35,24 @@ namespace Vidly.Controllers
                 return HttpNotFound();
 
             return View(customer);
+        }
+
+
+        public ActionResult CustomerForm()
+        {
+            var model = new ModifyCustomerViewModel
+            {
+                MembershipTypes = _context.MembershipTypes.ToList()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
