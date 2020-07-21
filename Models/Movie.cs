@@ -13,14 +13,17 @@ namespace Vidly.Models
         public string Name { get; set; }
 
         [Required]
+        [Column(TypeName = "datetime2")]
         public DateTime ReleaseDate { get; set; }
 
         public Genre Genre { get; set; }
 
         [Required]
+        [Display(Name = "Genre")]
         public byte GenreId { get; set; }
 
         [Required]
+        [Column(TypeName = "datetime2")]
         public DateTime DateAdded { get; set; }
 
         [Required]
