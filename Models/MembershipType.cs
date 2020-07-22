@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Vidly.Models
 {
@@ -18,7 +14,7 @@ namespace Vidly.Models
         [MaxLength(100)]
         public string Name { get; set; }
 
-        public static int PayAsYouGo = 1;
-        public static int UnknownSubscription = 0;
+        public static byte PayAsYouGo = 1;
+        public static byte UnknownSubscription = 0;
     }
 }

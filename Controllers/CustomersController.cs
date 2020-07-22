@@ -46,7 +46,7 @@ namespace Vidly.Controllers
             var model = new CustomerFormViewModel
             {
                 MembershipTypes = _context.MembershipTypes.ToList(),
-                Customer = new Customer()
+                Customer = new Customer() { MembershipTypeId = MembershipType.UnknownSubscription }
             };
 
             return View(model);

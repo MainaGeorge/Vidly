@@ -20,6 +20,8 @@ namespace Vidly.Models
 
         public MembershipType MembershipType { get; set; }
 
+        [Required(ErrorMessage = "Please select a subscription")]
+        [Display(Name = "Subscription")]
         public byte MembershipTypeId { get; set; }
     }
 }
