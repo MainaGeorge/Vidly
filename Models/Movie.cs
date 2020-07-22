@@ -9,6 +9,7 @@ namespace Vidly.Models
         public int Id { get; set; }
 
         [Required]
+        [Display(Name = "Title")]
         public string Name { get; set; }
 
         [Required]
@@ -17,7 +18,7 @@ namespace Vidly.Models
 
         public Genre Genre { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please select a Genre for the movie")]
         [Display(Name = "Genre")]
         public byte GenreId { get; set; }
 
@@ -26,7 +27,8 @@ namespace Vidly.Models
         public DateTime DateAdded { get; set; }
 
         [Required]
-        [Display(Name = "Copies in Stock")]
+        [Range(1, 20)]
+        [Display(Name = "Available copies in Stock")]
         public byte NumberInStock { get; set; }
 
 
