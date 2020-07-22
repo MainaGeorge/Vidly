@@ -13,7 +13,7 @@ namespace Vidly.Models
 
         [Display(Name = "Date of Birth")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
-        [Ensure18YearsOfAgeWithAnySubscription]
+        // [Ensure18YearsOfAgeWithAnySubscription]
         public DateTime? BirthDate { get; set; }
 
         [Display(Name = "Subscribe to newsletter?")]
