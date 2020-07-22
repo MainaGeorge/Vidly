@@ -17,5 +17,8 @@ namespace Vidly.Models
         [Required]
         [MaxLength(100)]
         public string Name { get; set; }
+
+        public static int PayAsYouGo = 1;
+        public static int UnknownSubscription = 0;
     }
 }
