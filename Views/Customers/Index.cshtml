@@ -17,21 +17,16 @@
 }
 else
 {
-    <table class="table table-hover table-bordered table-striped" id="customers">
-        <tr>
-            <th>Name</th>
-            <th>Membership Type</th>
-            <th>Delete</th>
-        </tr>
-
-        @foreach (var customer in Model)
-        {
+    <table class="table table-hover table-bordered" id="customers">
+        <thead>
             <tr>
-                <td> @Html.ActionLink(customer.Name, "Edit", new { controller = "Customers", id = @customer.Id })</td>
-                <td>@Html.DisplayFor(c => customer.MembershipType.Name)</td>
-                <td><button data-customer-id="@customer.Id" class="btn-link js-delete">Delete</button></td>
+                <th>Name</th>
+                <th>Membership Type</th>
+                <th>Delete</th>
             </tr>
-        }
+        </thead>
+        <tbody>
+        </tbody>
     </table>
 }
 
@@ -41,7 +36,33 @@ else
 {
     <script>
         $(document).ready(function () {
-            $("#customers .js-delete").on("click",
+            $("#customers").DataTable({
+                ajax: {
+                    url: "/api/customer",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name",
+                        render: function (data, type, customer) {
+                            return `<a href="/customer/edit/${customer.id}">${customer.name}<a/>`;
+                        }
+                    },
+                    {
+                        data: "name"
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return `<button class="js-delete btn-link" data-customer-id="${data}">Delete</button>`;
+                        }
+
+                    }
+                ]
+            });
+
+            $("#customers").on("click",
+                ".js-delete",
                 function () {
                     const button = $(this);
 
