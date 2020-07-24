@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data.Entity;
+using System.Linq;
 using System.Web.Http;
 using AutoMapper;
 using Vidly.DTOs;
@@ -19,6 +20,7 @@ namespace Vidly.Api
         public IHttpActionResult GetMovies()
         {
             return Ok(_context.Movies
+                .Include(m => m.Genre)
                 .ToList()
                 .Select(Mapper.Map<Movie, MovieDto>));
         }
@@ -27,7 +29,10 @@ namespace Vidly.Api
         [Route("api/movie/{id}", Name = "GetMovie")]
         public IHttpActionResult GetMovie(int id)
         {
-            var movie = _context.Movies.Find(id);
+            var movie = _context.Movies
+                .Include(m => m.Genre)
+                .FirstOrDefault(m => m.Id == id);
+
             if (movie == null)
             {
                 return NotFound();

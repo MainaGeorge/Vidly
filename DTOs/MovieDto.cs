@@ -27,5 +27,7 @@ namespace Vidly.DTOs
 
         public DateTime DateAdded { get; set; }
 
+        public GenreDto Genre { get; set; }
+
     }
 }

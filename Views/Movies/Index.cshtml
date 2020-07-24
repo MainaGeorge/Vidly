@@ -5,22 +5,45 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Movies</h2>
+@Html.ActionLink("Add new Movie", "ModifyMovie", new { Controller = "Movies" }, new { @class = "btn btn-success m-4" })
 
-@Html.ActionLink("Add new Movie", "ModifyMovie", new { Controller = "Movies" }, new { @class = "btn btn-success" })
-
-<table class="table">
-    <tr>
-        <th>@Html.DisplayNameFor(model => model.Name)</th>
-        <th>@Html.DisplayNameFor(m => m.Genre.Name)</th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<table class="table table-bordered table-striped table-hover" id="movies">
+    <thead>
         <tr>
-            <td>@Html.ActionLink(item.Name, "ModifyMovie", new { id = item.Id })</td>
-            <td>@Html.DisplayFor(c => item.Genre.Name)</td>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th>@Html.DisplayNameFor(m => m.Genre.Name)</th>
         </tr>
-    }
 
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(item.Name, "ModifyMovie", new { id = item.Id })</td>
+                <td>@Html.DisplayFor(c => item.Genre.Name)</td>
+            </tr>
+        }
+
+    </tbody>
 </table>
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            const table = $("#movies").DataTable({
+                ajax: {
+                    url: "api/movie",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+
+                    }
+                ]
+            });
+        });
+    </script>
+}
