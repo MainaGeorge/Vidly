@@ -17,14 +17,6 @@
     </thead>
 
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@Html.ActionLink(item.Name, "ModifyMovie", new { id = item.Id })</td>
-                <td>@Html.DisplayFor(c => item.Genre.Name)</td>
-            </tr>
-        }
-
     </tbody>
 </table>
 
@@ -40,7 +32,13 @@
                 },
                 columns: [
                     {
-
+                        data: "name",
+                        render: function (data, type, movie) {
+                            return `<a href="/movies/ModifyMovie/${movie.id}">${data.toUpperCase()}<a/>`;
+                        }
+                    },
+                    {
+                        data: "genre.name"
                     }
                 ]
             });
