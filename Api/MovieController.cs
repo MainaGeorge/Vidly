@@ -1,5 +1,4 @@
-﻿using System.Data.Entity;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Http;
 using AutoMapper;
 using Vidly.DTOs;
@@ -16,13 +15,16 @@ namespace Vidly.Api
         }
 
         [HttpGet]
+        [Route("api/movie")]
         public IHttpActionResult GetMovies()
         {
-            return Ok(_context.Movies.ToList().Select(Mapper.Map<Movie, MovieDto>));
+            return Ok(_context.Movies
+                .ToList()
+                .Select(Mapper.Map<Movie, MovieDto>));
         }
 
         [HttpGet]
-        [Route(Name = "GetMovie")]
+        [Route("api/movie/{id}", Name = "GetMovie")]
         public IHttpActionResult GetMovie(int id)
         {
             var movie = _context.Movies.Find(id);
@@ -35,6 +37,7 @@ namespace Vidly.Api
         }
 
         [HttpPost]
+        [Route("api/movie")]
         public IHttpActionResult PostMovie(MovieDto movieDto)
         {
             if (!ModelState.IsValid)
@@ -53,6 +56,7 @@ namespace Vidly.Api
         }
 
         [HttpPut]
+        [Route("api/movie/{id}")]
         public IHttpActionResult UpdateMovie(int id, MovieDto movieDto)
         {
             var movie = _context.Movies.Find(id);
@@ -68,6 +72,7 @@ namespace Vidly.Api
         }
 
         [HttpDelete]
+        [Route("api/movie/{id}")]
         public IHttpActionResult DeleteMovie(int id)
         {
             var movie = _context.Movies.Find(id);

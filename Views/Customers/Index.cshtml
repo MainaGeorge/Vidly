@@ -1,5 +1,4 @@
-﻿@model List<Vidly.Models.Customer>
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -8,35 +7,25 @@
 @Html.ActionLink("Add new customer", "CustomerForm", new
 {
     controller = "Customers",
-}, new { @class = "btn btn-success" })
+}, new { @class = "btn btn-success mb-3 mt-2" })
 
-
-@if (!Model.Any())
-{
-    <p> No customers yet</p>
-}
-else
-{
-    <table class="table table-hover table-bordered" id="customers">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Membership Type</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-}
-
-
+<table class="table table-hover table-bordered table-striped" id="customers">
+    <thead class="thead-dark">
+        <tr>
+            <th>Name</th>
+            <th>Membership Type</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
 
 @section scripts
 {
     <script>
         $(document).ready(function () {
-            $("#customers").DataTable({
+            const table = $("#customers").DataTable({
                 ajax: {
                     url: "/api/customer",
                     dataSrc: ""
@@ -73,8 +62,7 @@ else
                                     url: `/api/customer/${button.attr("data-customer-id")}`,
                                     method: "DELETE",
                                     success: function () {
-                                        console.log("success");
-                                        button.parents("tr").remove();
+                                        table.row(button.parents("tr")).remove().draw();
                                     },
                                     error: function () {
                                         console.log('An error occurred');

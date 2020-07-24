@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
 using AutoMapper;
@@ -17,6 +18,7 @@ namespace Vidly.Api
         }
 
         [HttpGet]
+        [Route("api/customer")]
         public IHttpActionResult GetCustomers()
         {
             return Ok(_context.Customers
@@ -26,10 +28,12 @@ namespace Vidly.Api
         }
 
         [HttpGet]
-        [Route(Name = "GetCustomer")]
+        [Route("api/customer/{id}", Name = "GetCustomer")]
         public IHttpActionResult GetCustomer(int id)
         {
-            var customer = _context.Customers.Find(id);
+            var customer = _context.Customers
+                .Include(c => c.MembershipType)
+                .FirstOrDefault(c => c.Id == id);
 
             if (customer == null)
                 return BadRequest();
@@ -39,6 +43,7 @@ namespace Vidly.Api
         }
 
         [HttpPost]
+        [Route("api/customer")]
         public IHttpActionResult PostCustomer(CustomerDto customerDto)
         {
             if (!ModelState.IsValid)
@@ -56,6 +61,7 @@ namespace Vidly.Api
         }
 
         [HttpPut]
+        [Route("api/customer/{id}")]
         public IHttpActionResult UpdateCustomer(int id, CustomerDto customerDto)
         {
             var customerFromDb = _context.Customers.Find(id);
@@ -71,6 +77,7 @@ namespace Vidly.Api
         }
 
         [HttpDelete]
+        [Route("api/customer/{id}")]
         public IHttpActionResult DeleteCustomer(int id)
         {
             var customerFromDb = _context.Customers.Find(id);
