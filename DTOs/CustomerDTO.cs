@@ -15,6 +15,8 @@ namespace Vidly.DTOs
         [Ensure18YearsOfAgeWithAnySubscription]
         public DateTime? BirthDate { get; set; }
 
+        public MembershipTypeDto MembershipTypeDto { get; set; }
+
         public bool IsSubscribedToNewsletter { get; set; }
 
         [Required(ErrorMessage = "Please select a subscription")]
